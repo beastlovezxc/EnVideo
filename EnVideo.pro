@@ -30,7 +30,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    EnVideo.pro.user
+    EnVideo.pro.user \
+    README.md
 
 HEADERS += \
     Controller/EvDispatcher.h
