@@ -11,7 +11,7 @@
 ## Opencv4
 
 ```sh
-    brew install opencv
+brew install opencv
 ```
 
 
