@@ -5,4 +5,19 @@ Item {
     visible: true
     width: 640
     height: 480
+
+    Image {
+        id: evShowFrame
+        anchors.centerIn: parent
+        anchors.fill: parent
+    }
+    Connections {
+        target: EvVideoCapture
+        onSigImage: {
+            evShowFrame.source=""
+            evShowFrame.source="image://img"
+        }
+    }
+
+
 }

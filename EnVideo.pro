@@ -13,6 +13,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        Common/EvShowFrame.cpp \
+        Common/EvVideoCapture.cpp \
         Controller/EvDispatcher.cpp \
         main.cpp
 
@@ -42,6 +44,8 @@ DISTFILES += \
     android/res/values/libs.xml
 
 HEADERS += \
+    Common/EvShowFrame.h \
+    Common/EvVideoCapture.h \
     Controller/EvDispatcher.h
 
 macx {
