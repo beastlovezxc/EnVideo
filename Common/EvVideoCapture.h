@@ -22,7 +22,7 @@ private slots:
     void slotVideoCaptureProcess();
 
 signals:
-    void sigImage();
+    void sigFrame();
 
 private:
     EvShowFrame* m_pEvShowFrame;

@@ -26,14 +26,12 @@ int main(int argc, char *argv[])
 
     viewer.engine()->addImageProvider("img",gEvVideoCapture->getEvShowFrame());
     viewer.rootContext()->setContextProperty("dispatcher", gEvDispatcher);
-   // viewer.rootContext()->setContextProperty("EvVideoCapture", gEvVideoCapture);
     viewer.rootContext()->setContextProperty("EvVideoCaptureView", gEvVideoCaptureView);
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     viewer.setSource(url);
     viewer.show();
 
-    //gEvVideoCapture->slotVideoCaptureProcess();
     gEvVideoCapture->startVideoCaptureProcess();
 
     return app.exec();
