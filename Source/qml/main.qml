@@ -8,14 +8,15 @@ Item {
 
     Image {
         id: evShowFrame
+        cache: false
         anchors.centerIn: parent
         anchors.fill: parent
     }
     Connections {
-        target: EvVideoCapture
-        onSigImage: {
-            evShowFrame.source=""
-            evShowFrame.source="image://img"
+        target: EvVideoCaptureView
+        onFrameChanged: {
+            evShowFrame.source="";
+            evShowFrame.source="image://img";
         }
     }
 

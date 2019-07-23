@@ -16,6 +16,7 @@ SOURCES += \
         Common/EvShowFrame.cpp \
         Common/EvVideoCapture.cpp \
         Controller/EvDispatcher.cpp \
+        View/EvVideoCaptureView.cpp \
         main.cpp
 
 RESOURCES += Source/qml.qrc
@@ -46,7 +47,8 @@ DISTFILES += \
 HEADERS += \
     Common/EvShowFrame.h \
     Common/EvVideoCapture.h \
-    Controller/EvDispatcher.h
+    Controller/EvDispatcher.h \
+    View/EvVideoCaptureView.h
 
 macx {
  INCLUDEPATH += /usr/local/Cellar/opencv/4.1.0_2/include/opencv4

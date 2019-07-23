@@ -5,13 +5,19 @@ EvVideoCapture::EvVideoCapture()
 {
     m_pEvShowFrame = new EvShowFrame();
    // m_pVideoCapture = new VideoCapture();
-   // this->moveToThread(&mWorkThread);
-   // connect(&mWorkThread, SIGNAL(started()), this, SLOT(slotVideoCaptureProcess()), Qt::QueuedConnection);
+    this->moveToThread(&mWorkThread);
+    connect(&mWorkThread, SIGNAL(started()), this, SLOT(slotVideoCaptureProcess()), Qt::QueuedConnection);
 }
 
 void EvVideoCapture::startVideoCaptureProcess()
 {
     mWorkThread.start();
+}
+
+void EvVideoCapture::registEvVideoCaptureView(EvVideoCaptureView *videoCaptureView)
+{
+    m_pEvVideoCaptureView = videoCaptureView;
+    connect(this, SIGNAL(sigImage()), m_pEvVideoCaptureView, SLOT(setFrame()), Qt::QueuedConnection);
 }
 
 void EvVideoCapture::slotVideoCaptureProcess()
