@@ -13,6 +13,10 @@
 ```sh
 brew install opencv
 ```
+## NCNN
+环境配置：
+
+https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-macosx
 
 
 
