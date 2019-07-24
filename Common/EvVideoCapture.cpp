@@ -21,7 +21,7 @@ void EvVideoCapture::registEvVideoCaptureView(EvVideoCaptureView *videoCaptureVi
 
 void EvVideoCapture::slotVideoCaptureProcess()
 {
-    QFileInfo file("~/WorkSpace/1.mp4");
+    QFileInfo file("/Users/Bean/WorkSpace/1.mp4");
     if(file.exists() == false) {
         qDebug() << "error";
         return ;
