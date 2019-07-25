@@ -4,8 +4,15 @@
 EvVideoCapture::EvVideoCapture()
 {
     m_pEvShowFrame = new EvShowFrame();
+    m_bCameraOn = false;
+    m_pVideoCapture = VideoCapture("/Users/Bean/WorkSpace/1.mp4");
     this->moveToThread(&mWorkThread);
     connect(&mWorkThread, SIGNAL(started()), this, SLOT(slotVideoCaptureProcess()), Qt::QueuedConnection);
+}
+
+EvVideoCapture::~EvVideoCapture()
+{
+    mWorkThread.quit();
 }
 
 void EvVideoCapture::startVideoCaptureProcess()
@@ -19,6 +26,22 @@ void EvVideoCapture::registEvVideoCaptureView(EvVideoCaptureView *videoCaptureVi
     connect(this, SIGNAL(sigFrame()), m_pEvVideoCaptureView, SLOT(setFrame()), Qt::QueuedConnection);
 }
 
+void EvVideoCapture::restartProcess(bool isCameraOn)
+{
+    if(isCameraOn == m_bCameraOn)
+        return;
+    m_bCameraOn = isCameraOn;
+    if(isCameraOn) {
+        mWorkThread.quit();
+        m_pVideoCapture = VideoCapture(0);
+        mWorkThread.start();
+    } else {
+        mWorkThread.quit();
+        m_pVideoCapture = VideoCapture("/Users/Bean/WorkSpace/1.mp4");
+        mWorkThread.start();
+    }
+}
+
 void EvVideoCapture::slotVideoCaptureProcess()
 {
     QFileInfo file("/Users/Bean/WorkSpace/1.mp4");
@@ -26,7 +49,6 @@ void EvVideoCapture::slotVideoCaptureProcess()
         qDebug() << "error";
         return ;
     }
-    m_pVideoCapture = VideoCapture("/Users/Bean/WorkSpace/1.mp4");
     qDebug() << "Correct";
 
     int count = 0;

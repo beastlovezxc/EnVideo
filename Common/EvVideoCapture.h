@@ -13,9 +13,11 @@ class EvVideoCapture : public QObject {
     Q_OBJECT
 public:
     EvVideoCapture();
+    ~EvVideoCapture();
     QThread mWorkThread;
     void startVideoCaptureProcess();
     void registEvVideoCaptureView(EvVideoCaptureView *videoCaptureView);
+    void restartProcess(bool isCameraOn);
     EvShowFrame* getEvShowFrame() { return m_pEvShowFrame;}
 
 private slots:
@@ -28,6 +30,7 @@ private:
     EvShowFrame* m_pEvShowFrame;
     VideoCapture m_pVideoCapture;
     Mat          m_pFrame;
+    bool         m_bCameraOn;
 
     EvVideoCaptureView* m_pEvVideoCaptureView;
 };

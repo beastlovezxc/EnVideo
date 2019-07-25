@@ -16,6 +16,7 @@ SOURCES += \
         Common/EvShowFrame.cpp \
         Common/EvVideoCapture.cpp \
         Controller/EvDispatcher.cpp \
+        View/EvSetting.cpp \
         View/EvVideoCaptureView.cpp \
         main.cpp
 
@@ -48,6 +49,7 @@ HEADERS += \
     Common/EvShowFrame.h \
     Common/EvVideoCapture.h \
     Controller/EvDispatcher.h \
+    View/EvSetting.h \
     View/EvVideoCaptureView.h
 
 macx {

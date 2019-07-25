@@ -7,6 +7,7 @@
 #include "Controller/EvDispatcher.h"
 #include "Common/EvVideoCapture.h"
 #include "View/EvVideoCaptureView.h"
+#include "View/EvSetting.h"
 
 #include "opencv2/opencv.hpp"
 #include "net.h"
@@ -74,9 +75,10 @@ int main(int argc, char *argv[])
     EvDispatcher* gEvDispatcher = new EvDispatcher();
     EvVideoCapture* gEvVideoCapture = new EvVideoCapture();
     EvVideoCaptureView* gEvVideoCaptureView = new EvVideoCaptureView();
+    EvSetting* gEvSettingView = new EvSetting();
 
     gEvVideoCapture->registEvVideoCaptureView(gEvVideoCaptureView);
-
+    gEvSettingView->registVideoCapture(gEvVideoCapture);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
@@ -85,6 +87,7 @@ int main(int argc, char *argv[])
     viewer.engine()->addImageProvider("img",gEvVideoCapture->getEvShowFrame());
     viewer.rootContext()->setContextProperty("dispatcher", gEvDispatcher);
     viewer.rootContext()->setContextProperty("EvVideoCaptureView", gEvVideoCaptureView);
+    viewer.rootContext()->setContextProperty("EvSettingView", gEvSettingView);
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     viewer.setSource(url);
