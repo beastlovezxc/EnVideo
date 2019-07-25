@@ -8,6 +8,7 @@ Item {
     width: 800
     height: 480
 
+
     Image {
         id: evShowFrame
         cache: false
@@ -27,8 +28,9 @@ Item {
         id: videoBtn
         text: EvSettingView.videoStatus
         anchors.right: parent.right
-        anchors.rightMargin: 80
+        anchors.rightMargin: 50
         anchors.verticalCenter: parent.verticalCenter
+        width: 100
         highlighted: true
         flat: true
         onClicked: {
