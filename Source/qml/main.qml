@@ -1,6 +1,7 @@
-import QtQuick 2.13
+import QtQuick 2.2
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.5
+import QtQuick.Dialogs 1.3
 
 import "../Component"
 Item {
@@ -37,12 +38,51 @@ Item {
             setVideoBtn()
         }
     }
+    Button {
+        id: fileDialogBtn
+        text: qsTr("打开文件");
+        anchors.right: parent.right
+        anchors.rightMargin: 50
+        anchors.top: videoBtn.bottom
+        anchors.topMargin: 30
+        width: 100
+        highlighted: true
+        flat: true
+        onClicked: {
+            videoDialog.open()
+        }
+    }
+    Text {
+        id: videoPath
+        text: EvSettingView.videoPath
+        anchors.verticalCenter: fileDialogBtn.verticalCenter
+        anchors.top: fileDialogBtn.bottom
+        anchors.topMargin: 30
+        font.pixelSize: 15
+    }
+
+    FileDialog {
+        id: videoDialog
+        title: qsTr("请选择视频文件")
+        folder: shortcuts.home
+        onAccepted: {
+            EvSettingView.videoPath = String(fileUrl)
+            console.log(EvSettingView.videoPath)
+        }
+        onRejected: {
+        }
+    }
 
     function setVideoBtn() {
-        if(EvSettingView.cameraOn)
+        if(EvSettingView.cameraOn) {
             EvSettingView.cameraOn = false;
-        else
+            fileDialogBtn.visible = true;
+            videoPath.visible = true;
+        } else {
             EvSettingView.cameraOn = true;
+            fileDialogBtn.visible = false;
+            videoPath.visible = false;
+        }
     }
 
 }

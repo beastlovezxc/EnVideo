@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
     viewer.setSource(url);
     viewer.show();
 
-    gEvVideoCapture->startVideoCaptureProcess();
+   // gEvVideoCapture->startVideoCaptureProcess();
 
     return app.exec();
 }

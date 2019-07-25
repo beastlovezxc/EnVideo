@@ -18,6 +18,9 @@ public:
     void startVideoCaptureProcess();
     void registEvVideoCaptureView(EvVideoCaptureView *videoCaptureView);
     void restartProcess(bool isCameraOn);
+    void closeProcess();
+    void setVideoPath(QString videoPath);
+    void setCameraOn(bool isCameraOn);
     EvShowFrame* getEvShowFrame() { return m_pEvShowFrame;}
 
 private slots:
@@ -33,6 +36,8 @@ private:
     bool         m_bCameraOn;
 
     EvVideoCaptureView* m_pEvVideoCaptureView;
+
+    QString      m_strVideoPath;
 };
 
 #endif // EVVIDEOCAPTURE_H
