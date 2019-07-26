@@ -37,7 +37,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     .gitignore \
     EnVideo.pro.user \
-    Model/squeezenet_v1.1.bin \
     Model/squeezenet_v1.1.param \
     Model/synset_words.txt \
     README.md \

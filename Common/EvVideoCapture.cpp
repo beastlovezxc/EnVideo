@@ -21,7 +21,7 @@ void EvVideoCapture::startVideoCaptureProcess()
     if(!m_bCameraOn) {
         m_pVideoCapture = VideoCapture(m_strVideoPath.toStdString());
     } else {
-        m_pVideoCapture = VideoCapture(0);
+        m_pVideoCapture = VideoCapture(1200);
     }
     mWorkThread.start();
 }
@@ -68,15 +68,33 @@ void EvVideoCapture::slotVideoCaptureProcess()
 {
     int count = 0;
     while(1) {
+        Mat frame;
         if(!m_pVideoCapture.isOpened()) {
             break;
         }
-        m_pVideoCapture >> m_pFrame;
-        if(m_pFrame.empty())
+        m_pVideoCapture >> frame;
+        if(frame.empty())
             break;
         qDebug() << "count is " << ++count;
+        m_pFrame = BGRToRGB(frame);
         m_pEvShowFrame->setFrame(m_pFrame);
         waitKey(30);
         emit sigFrame();
     }
+}
+Mat EvVideoCapture::BGRToRGB(Mat img)
+{
+    Mat image(img.rows, img.cols, CV_8UC3);
+    for (int i = 0; i < img.rows; ++i)
+    {
+        Vec3b *p1 = img.ptr<Vec3b>(i);
+        Vec3b *p2 = image.ptr<Vec3b>(i);
+        for(int j=0; j<img.cols; ++j)
+        {
+            p2[j][2] = p1[j][0];
+            p2[j][1] = p1[j][1];
+            p2[j][0] = p1[j][2];
+        }
+    }
+    return image;
 }

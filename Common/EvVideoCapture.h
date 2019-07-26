@@ -21,6 +21,7 @@ public:
     void closeProcess();
     void setVideoPath(QString videoPath);
     void setCameraOn(bool isCameraOn);
+    Mat BGRToRGB(Mat img);
     EvShowFrame* getEvShowFrame() { return m_pEvShowFrame;}
 
 private slots:

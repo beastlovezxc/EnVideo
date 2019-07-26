@@ -23,3 +23,4 @@ void EvShowFrame::setFrame(Mat frame)
     img = QImage(imgData, m_pFrame.cols, m_pFrame.rows, QImage::Format_RGB888);
         //imshow("读取视频", frame);
 }
+
