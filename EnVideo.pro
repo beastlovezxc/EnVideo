@@ -16,6 +16,7 @@ SOURCES += \
         Common/EvShowFrame.cpp \
         Common/EvVideoCapture.cpp \
         Controller/EvDispatcher.cpp \
+        Library/Classification.cpp \
         View/EvSetting.cpp \
         View/EvVideoCaptureView.cpp \
         main.cpp
@@ -36,6 +37,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     .gitignore \
     EnVideo.pro.user \
+    Model/squeezenet_v1.1.bin \
+    Model/squeezenet_v1.1.param \
+    Model/synset_words.txt \
     README.md \
     android/AndroidManifest.xml \
     android/build.gradle \
@@ -49,6 +53,7 @@ HEADERS += \
     Common/EvShowFrame.h \
     Common/EvVideoCapture.h \
     Controller/EvDispatcher.h \
+    Library/Classification.h \
     View/EvSetting.h \
     View/EvVideoCaptureView.h
 
