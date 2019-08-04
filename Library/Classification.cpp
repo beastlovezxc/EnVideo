@@ -15,6 +15,14 @@ Classification::Classification(const char* param_path, const char*  model_path)
 
     net_ptr->load_param(param_path);
     net_ptr->load_model(model_path);
+    ncnn::Extractor ex = net_ptr->create_extractor();
+    /*
+     *  Get Extractor
+     *
+     */
+    ex.set_light_mode(true);
+    ex.set_num_threads(4);
+    exptr = &ex;
 }
 
 ncnn::Extractor Classification::GetExtractor()
@@ -25,7 +33,7 @@ ncnn::Extractor Classification::GetExtractor()
     return ex;
 }
 
-void Classification::Detect(ncnn::Extractor& ex, const cv::Mat& bgr)
+void Classification::Detect(const cv::Mat& bgr)
 {
     QDateTime dateTime = QDateTime::currentDateTime();
     // 字符串格式化
@@ -36,14 +44,14 @@ void Classification::Detect(ncnn::Extractor& ex, const cv::Mat& bgr)
     qint64 epochTime = dateTime.toMSecsSinceEpoch();
 
     // --------------------------------
-
+    ncnn::Extractor ex = net_ptr->create_extractor();
+    ex.set_light_mode(true);
+    ex.set_num_threads(4);
     ncnn::Mat in = ncnn::Mat::from_pixels_resize(bgr.data, ncnn::Mat::PIXEL_BGR, bgr.cols, bgr.rows, 227, 227);
     const float mean_vals[3] = {104.f, 117.f, 123.f};
     in.substract_mean_normalize(mean_vals, 0);
-
     ex.input("data", in);
     ex.extract("prob", out);
-
     // --------------------------------
 
     dateTime = QDateTime::currentDateTime();
@@ -51,8 +59,8 @@ void Classification::Detect(ncnn::Extractor& ex, const cv::Mat& bgr)
     ms = dateTime.time().msec();
     qint64 epochTime1 = dateTime.toMSecsSinceEpoch();
     qDebug() << epochTime1-epochTime << "ms";
+    PrintTopK(3);
 }
-
 void Classification::PrintTopK(int topk)
 {
     cls_scores.resize(out.w);

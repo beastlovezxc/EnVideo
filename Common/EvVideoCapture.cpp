@@ -7,6 +7,7 @@ EvVideoCapture::EvVideoCapture():
     m_strVideoPath("")
 {
     m_pEvShowFrame = new EvShowFrame();
+    m_pClassification = new Classification("/Users/Bean/WorkSpace/ncnn/squeezenet_v1.1.param","/Users/Bean/WorkSpace/ncnn/squeezenet_v1.1.bin");
     this->moveToThread(&mWorkThread);
     connect(&mWorkThread, SIGNAL(started()), this, SLOT(slotVideoCaptureProcess()), Qt::QueuedConnection);
 }
@@ -78,6 +79,7 @@ void EvVideoCapture::slotVideoCaptureProcess()
         qDebug() << "count is " << ++count;
         m_pFrame = BGRToRGB(frame);
         m_pEvShowFrame->setFrame(m_pFrame);
+        m_pClassification->Detect(m_pFrame);
         waitKey(30);
         emit sigFrame();
     }

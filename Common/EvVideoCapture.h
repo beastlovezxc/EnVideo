@@ -7,6 +7,7 @@
 #include "EvShowFrame.h"
 #include "View/EvVideoCaptureView.h"
 #include "opencv2/opencv.hpp"
+#include "Library/Classification.h"
 
 using namespace cv;
 class EvVideoCapture : public QObject {
@@ -37,6 +38,7 @@ private:
     bool         m_bCameraOn;
 
     EvVideoCaptureView* m_pEvVideoCaptureView;
+    Classification* m_pClassification;
 
     QString      m_strVideoPath;
 };

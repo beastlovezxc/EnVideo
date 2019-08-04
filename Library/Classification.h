@@ -13,13 +13,14 @@ class Classification
 public:
     Classification(const char* param_path, const char*  model_path);
     ncnn::Extractor GetExtractor();
-    void Detect(ncnn::Extractor& ex, const cv::Mat& bgr);
+    void Detect(const cv::Mat& bgr);
     void PrintTopK(int topk);
     ~Classification();
 
 private:
     ncnn::Net* net_ptr;
     ncnn::Mat out;
+    ncnn::Extractor*   exptr;
 
     std::vector<float> cls_scores;
 };
